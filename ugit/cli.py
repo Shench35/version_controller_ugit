@@ -78,6 +78,10 @@ def parse_args():
     diff_parser.set_defaults(func=_diff)
     diff_parser.add_argument("commit", default="@", type=oid, nargs="?")
 
+    merge_parser = commands.add_parser("merge")
+    merge_parser.set_defaults(func=merge)
+    merge_parser.add_argument("commit", type=oid)
+
     return parser.parse_args()
 
 def init(args):
@@ -144,6 +148,9 @@ def branch(args):
 
 def reset(args):
     base.reset(args.commit)
+
+def merge(args):
+    base.merge(args.commit)
 
 def show(args):
     if not args.oid:
